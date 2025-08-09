@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Search Utility</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <nav class="nav">
+            <a href="../../" class="back-btn">← Back to Dashboard</a>
+        </nav>
+        
+        <header class="header">
+            <h1>Movie Search</h1>
+            <p>Find movies from around the world with streaming and download links</p>
+        </header>
+        
+        <main class="movie-search">
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="Search for movies..." autocomplete="off">
+                    <button class="search-btn" id="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                
+                <div class="filters">
+                    <div class="filter-group">
+                        <label for="year-filter">Year</label>
+                        <select id="year-filter">
+                            <option value="">All Years</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="genre-filter">Genre</label>
+                        <select id="genre-filter">
+                            <option value="">All Genres</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="quality-filter">Quality</label>
+                        <select id="quality-filter">
+                            <option value="">All Qualities</option>
+                            <option value="4K">4K</option>
+                            <option value="1080p">1080p</option>
+                            <option value="720p">720p</option>
+                            <option value="480p">480p</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="results-container">
+                <div class="results-header">
+                    <h3>Search Results</h3>
+                    <div class="results-count" id="results-count">0 movies found</div>
+                </div>
+                
+                <div class="results-grid" id="results-grid">
+                    <!-- Movie results will be displayed here -->
+                    <div class="empty-state">
+                        <div class="empty-icon">🎬</div>
+                        <h3>Search for Movies</h3>
+                        <p>Enter a movie title above to begin your search</p>
+                    </div>
+                </div>
+                
+                <div class="loading" id="loading" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Searching for movies...</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

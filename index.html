@@ -56,6 +56,17 @@
                     <div class="coming-soon-pill">Soon</div>
                 </a>
                 
+                <a href="#" class="nav-item" data-section="movie-search">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                        <polyline points="7.5,4.21 12,6.81 16.5,4.21"></polyline>
+                        <polyline points="7.5,19.79 7.5,14.65 3,12.33"></polyline>
+                        <polyline points="21,12.33 16.5,14.65 16.5,19.79"></polyline>
+                        <polyline points="3.27,6.96 12,12.01 20.73,6.96"></polyline>
+                    </svg>
+                    <span>Movie Search</span>
+                </a>
+                
                 <a href="#" class="nav-item" data-section="encoders">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
@@ -128,6 +139,13 @@
                         <div class="card-status coming-soon">Coming Soon</div>
                     </div>
                     
+                    <div class="utility-card" data-section="movie-search">
+                        <div class="card-icon">🎬</div>
+                        <h3>Movie Search</h3>
+                        <p>Find movies from around the world with streaming and download links, subtitles, and quality information</p>
+                        <div class="card-status">Available</div>
+                    </div>
+                    
                     <div class="utility-card disabled">
                         <div class="card-icon">🔗</div>
                         <h3>URL & Base64</h3>
@@ -192,6 +210,36 @@
                     <div class="coming-soon-icon">📝</div>
                     <h3>Coming Soon</h3>
                     <p>Text transformation tools are currently under development</p>
+                </div>
+            </div>
+
+            <!-- Movie Search Section -->
+            <div class="content-section" id="movie-search-section">
+                <div class="page-header">
+                    <h1>Movie Search</h1>
+                    <p>Find movies from around the world with streaming and download links</p>
+                </div>
+                
+                <div class="converter-container">
+                    <div class="converter-card">
+                        <div class="upload-zone" onclick="window.open('./utilities/movie-search/', '_self')">
+                            <div class="upload-icon">🎬</div>
+                            <h3>Launch Movie Search</h3>
+                            <p>Click to open the movie search utility with advanced filtering</p>
+                            <button class="primary-btn">Open Movie Search</button>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-list">
+                        <h4>Features</h4>
+                        <ul>
+                            <li>✓ Search movies from around the world</li>
+                            <li>✓ Find streaming and download links</li>
+                            <li>✓ Subtitle availability information</li>
+                            <li>✓ Video quality details</li>
+                            <li>✓ Advanced filtering options</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
