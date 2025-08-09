@@ -9,11 +9,26 @@ class UtilityDashboard {
     }
     
     initEventListeners() {
-        // Card click handlers
+        // Add staggered animation to cards
+        document.querySelectorAll('.utility-card').forEach((card, index) => {
+            card.style.animationDelay = `${0.1 * index}s`;
+        });
+        
+        // Card click handlers with enhanced feedback
         document.querySelectorAll('.utility-card').forEach(card => {
             card.addEventListener('click', (e) => {
                 const utility = e.currentTarget.dataset.utility;
-                this.openUtility(utility);
+                this.addClickRipple(e);
+                setTimeout(() => this.openUtility(utility), 200);
+            });
+            
+            // Add hover sound effect simulation (visual feedback)
+            card.addEventListener('mouseenter', () => {
+                card.style.filter = 'brightness(1.05)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.filter = 'brightness(1)';
             });
         });
         
@@ -26,6 +41,72 @@ class UtilityDashboard {
         // Keyboard shortcuts
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') this.closeModal();
+        });
+        
+        // Add scroll-based animations
+        this.initScrollAnimations();
+    }
+    
+    addClickRipple(event) {
+        const card = event.currentTarget;
+        const ripple = document.createElement('div');
+        const rect = card.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = event.clientX - rect.left - size / 2;
+        const y = event.clientY - rect.top - size / 2;
+        
+        ripple.style.cssText = `
+            position: absolute;
+            width: ${size}px;
+            height: ${size}px;
+            left: ${x}px;
+            top: ${y}px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: scale(0);
+            animation: ripple 0.6s ease-out;
+            pointer-events: none;
+            z-index: 1;
+        `;
+        
+        if (!document.querySelector('style[data-ripple]')) {
+            const style = document.createElement('style');
+            style.setAttribute('data-ripple', '');
+            style.textContent = `
+                @keyframes ripple {
+                    0% { transform: scale(0); opacity: 1; }
+                    100% { transform: scale(2); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        card.style.position = 'relative';
+        card.appendChild(ripple);
+        
+        setTimeout(() => {
+            if (ripple.parentNode) {
+                ripple.parentNode.removeChild(ripple);
+            }
+        }, 600);
+    }
+    
+    initScrollAnimations() {
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.utility-card').forEach(card => {
+            observer.observe(card);
         });
     }
     
@@ -61,17 +142,44 @@ class UtilityDashboard {
         if (util) {
             this.modalTitle.textContent = util.title;
             this.modalBody.innerHTML = util.content;
+            
+            // Enhanced modal opening animation
             this.modal.style.display = 'block';
+            requestAnimationFrame(() => {
+                this.modal.classList.add('show');
+            });
+            
             document.body.style.overflow = 'hidden';
             
             // Initialize utility-specific functionality
             this.initUtilityHandlers(utility);
+            
+            // Add entrance animation to modal content
+            this.animateModalContent();
         }
     }
     
+    animateModalContent() {
+        const elements = this.modalBody.querySelectorAll('.input-group, .btn');
+        elements.forEach((el, index) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.4s ease';
+            
+            setTimeout(() => {
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            }, 100 + (index * 50));
+        });
+    }
+    
     closeModal() {
-        this.modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
+        this.modal.classList.remove('show');
+        
+        setTimeout(() => {
+            this.modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }, 300);
     }
     
     createPdfToMarkdownUI() {
