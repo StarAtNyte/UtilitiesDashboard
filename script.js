@@ -1,51 +1,154 @@
-class UtilitiesChatInterface {
+class UtilitiesDashboard {
     constructor() {
-        this.searchInput = document.getElementById('search-input');
-        this.searchBtn = document.getElementById('search-btn');
-        this.searchResults = document.getElementById('search-results');
-        this.welcomeSection = document.getElementById('welcome-section');
-        this.utilityContent = document.getElementById('utility-content');
-        this.sidebarToggle = document.getElementById('sidebar-toggle');
         this.sidebar = document.getElementById('sidebar');
-        this.utilityItems = document.querySelectorAll('.utility-item');
+        this.sidebarToggle = document.getElementById('sidebar-toggle');
+        this.mobileSidebarToggle = document.getElementById('mobile-sidebar-toggle');
+        this.navItems = document.querySelectorAll('.nav-item');
+        this.contentSections = document.querySelectorAll('.content-section');
         
-        this.utilities = {
-            'pdf-to-markdown': {
-                name: 'PDF to Markdown',
-                icon: '📄',
-                description: 'Convert PDF documents to clean Markdown format',
-                keywords: ['pdf', 'markdown', 'convert', 'document', 'text', 'export']
-            },
-            'json-formatter': {
-                name: 'JSON Formatter',
-                icon: '🔧',
-                description: 'Format and validate JSON data',
-                keywords: ['json', 'format', 'validate', 'pretty', 'minify', 'parse']
-            },
-            'text-formatter': {
-                name: 'Text Formatter',
-                icon: '📝',
-                description: 'Clean and transform text content',
-                keywords: ['text', 'format', 'clean', 'transform', 'case', 'trim']
-            },
-            'url-encoder': {
-                name: 'URL Encoder',
-                icon: '🔗',
-                description: 'Encode and decode URL strings',
-                keywords: ['url', 'encode', 'decode', 'uri', 'percent', 'escape']
-            },
-            'base64': {
-                name: 'Base64',
-                icon: '🎯',
-                description: 'Base64 encoding and decoding',
-                keywords: ['base64', 'encode', 'decode', 'binary', 'string', 'data']
-            },
-            'hash-generator': {
-                name: 'Hash Generator',
-                icon: '🔐',
-                description: 'Generate MD5, SHA1, SHA256 hashes',
-                keywords: ['hash', 'md5', 'sha1', 'sha256', 'checksum', 'digest', 'crypto']
+        this.currentSection = 'dashboard';
+        this.sidebarOverlay = null;
+        
+        this.initEventListeners();
+        this.createMobileSidebarOverlay();
+        this.initCardAnimations();
+    }
+    
+    initEventListeners() {
+        // Navigation items
+        this.navItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const section = e.currentTarget.dataset.section;
+                this.switchSection(section);
+            });
+        });
+        
+        // Mobile sidebar toggle
+        if (this.mobileSidebarToggle) {
+            this.mobileSidebarToggle.addEventListener('click', () => {
+                this.toggleMobileSidebar();
+            });
+        }
+        
+        // Desktop sidebar toggle (if needed in future)
+        if (this.sidebarToggle) {
+            this.sidebarToggle.addEventListener('click', () => {
+                this.toggleSidebar();
+            });
+        }
+        
+        // Close mobile sidebar when clicking outside
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768) {
+                if (!e.target.closest('.sidebar') && !e.target.closest('.mobile-sidebar-toggle')) {
+                    this.closeMobileSidebar();
+                }
             }
+        });
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                this.closeMobileSidebar();
+            }
+        });
+    }
+    
+    switchSection(sectionId) {
+        // Update nav items
+        this.navItems.forEach(item => {
+            item.classList.remove('active');
+            if (item.dataset.section === sectionId) {
+                item.classList.add('active');
+            }
+        });
+        
+        // Update content sections
+        this.contentSections.forEach(section => {
+            section.classList.remove('active');
+            if (section.id === `${sectionId}-section`) {
+                section.classList.add('active');
+            }
+        });
+        
+        this.currentSection = sectionId;
+        
+        // Close mobile sidebar after selection
+        if (window.innerWidth <= 768) {
+            this.closeMobileSidebar();
+        }
+    }
+    
+    toggleSidebar() {
+        this.sidebar.classList.toggle('collapsed');
+    }
+    
+    toggleMobileSidebar() {
+        const isOpen = this.sidebar.classList.contains('open');
+        if (isOpen) {
+            this.closeMobileSidebar();
+        } else {
+            this.openMobileSidebar();
+        }
+    }
+    
+    openMobileSidebar() {
+        this.sidebar.classList.add('open');
+        if (this.sidebarOverlay) {
+            this.sidebarOverlay.classList.add('active');
+        }
+        document.body.style.overflow = 'hidden';
+    }
+    
+    closeMobileSidebar() {
+        this.sidebar.classList.remove('open');
+        if (this.sidebarOverlay) {
+            this.sidebarOverlay.classList.remove('active');
+        }
+        document.body.style.overflow = 'auto';
+    }
+    
+    createMobileSidebarOverlay() {
+        this.sidebarOverlay = document.createElement('div');
+        this.sidebarOverlay.className = 'sidebar-overlay';
+        this.sidebarOverlay.addEventListener('click', () => {
+            this.closeMobileSidebar();
+        });
+        document.body.appendChild(this.sidebarOverlay);
+    }
+    
+    initCardAnimations() {
+        // Add staggered animation to cards
+        const cards = document.querySelectorAll('.utility-card');
+        cards.forEach((card, index) => {
+            card.style.animationDelay = `${0.1 * index}s`;
+            
+            // Add enhanced hover effects for non-coming-soon cards
+            if (!card.classList.contains('coming-soon')) {
+                card.addEventListener('mouseenter', () => {
+                    card.style.filter = 'brightness(1.05)';
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.filter = 'brightness(1)';
+                });
+            }
+        });
+        
+        // Add scroll-based animations using Intersection Observer
+        if ('IntersectionObserver' in window) {
+            this.initScrollAnimations();
+        }
+    }
+    
+    initScrollAnimations() {
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
         };
         
-        this.currentUtility = null;\n        this.initEventListeners();\n    }\n    \n    initEventListeners() {\n        // Search functionality\n        this.searchInput.addEventListener('input', (e) => this.handleSearch(e.target.value));\n        this.searchInput.addEventListener('focus', () => this.showSearchIfHasValue());\n        this.searchBtn.addEventListener('click', () => this.handleSearchSubmit());\n        \n        // Sidebar utilities\n        this.utilityItems.forEach(item => {\n            item.addEventListener('click', (e) => {\n                const utility = e.currentTarget.dataset.utility;\n                this.selectUtility(utility);\n            });\n        });\n        \n        // Sidebar toggle for mobile\n        this.sidebarToggle.addEventListener('click', () => this.toggleSidebar());\n        \n        // Close search results when clicking outside\n        document.addEventListener('click', (e) => {\n            if (!e.target.closest('.search-bar')) {\n                this.hideSearchResults();\n            }\n        });\n        \n        // Keyboard shortcuts\n        document.addEventListener('keydown', (e) => {\n            if (e.key === 'Escape') {\n                this.hideSearchResults();\n                this.searchInput.blur();\n            }\n            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {\n                e.preventDefault();\n                this.searchInput.focus();\n            }\n        });\n    }\n    \n    handleSearch(query) {\n        if (!query.trim()) {\n            this.hideSearchResults();\n            return;\n        }\n        \n        const results = this.searchUtilities(query);\n        this.displaySearchResults(results);\n    }\n    \n    searchUtilities(query) {\n        const searchTerm = query.toLowerCase();\n        const results = [];\n        \n        Object.entries(this.utilities).forEach(([key, utility]) => {\n            const score = this.calculateSearchScore(utility, searchTerm);\n            if (score > 0) {\n                results.push({ key, utility, score });\n            }\n        });\n        \n        return results.sort((a, b) => b.score - a.score);\n    }\n    \n    calculateSearchScore(utility, searchTerm) {\n        let score = 0;\n        \n        // Exact name match\n        if (utility.name.toLowerCase().includes(searchTerm)) {\n            score += 10;\n        }\n        \n        // Description match\n        if (utility.description.toLowerCase().includes(searchTerm)) {\n            score += 5;\n        }\n        \n        // Keywords match\n        utility.keywords.forEach(keyword => {\n            if (keyword.includes(searchTerm)) {\n                score += 3;\n            }\n        });\n        \n        return score;\n    }\n    \n    displaySearchResults(results) {\n        if (results.length === 0) {\n            this.searchResults.innerHTML = `\n                <div class=\"search-result-item\">\n                    <div class=\"search-result-info\">\n                        <div class=\"search-result-name\">No utilities found</div>\n                        <div class=\"search-result-desc\">Try a different search term</div>\n                    </div>\n                </div>\n            `;\n        } else {\n            this.searchResults.innerHTML = results.map(({ key, utility }) => `\n                <div class=\"search-result-item\" data-utility=\"${key}\">\n                    <div class=\"search-result-icon\">${utility.icon}</div>\n                    <div class=\"search-result-info\">\n                        <div class=\"search-result-name\">${utility.name}</div>\n                        <div class=\"search-result-desc\">${utility.description}</div>\n                    </div>\n                </div>\n            `).join('');\n            \n            // Add click handlers to results\n            this.searchResults.querySelectorAll('.search-result-item').forEach(item => {\n                item.addEventListener('click', () => {\n                    const utility = item.dataset.utility;\n                    if (utility) {\n                        this.selectUtility(utility);\n                        this.hideSearchResults();\n                        this.searchInput.value = '';\n                    }\n                });\n            });\n        }\n        \n        this.showSearchResults();\n    }\n    \n    showSearchResults() {\n        this.searchResults.style.display = 'block';\n    }\n    \n    hideSearchResults() {\n        this.searchResults.style.display = 'none';\n    }\n    \n    showSearchIfHasValue() {\n        if (this.searchInput.value.trim()) {\n            this.showSearchResults();\n        }\n    }\n    \n    handleSearchSubmit() {\n        const query = this.searchInput.value.trim();\n        if (!query) return;\n        \n        const results = this.searchUtilities(query);\n        if (results.length > 0) {\n            this.selectUtility(results[0].key);\n            this.hideSearchResults();\n            this.searchInput.value = '';\n        }\n    }\n    \n    selectUtility(utilityKey) {\n        // Update sidebar selection\n        this.utilityItems.forEach(item => {\n            item.classList.remove('active');\n            if (item.dataset.utility === utilityKey) {\n                item.classList.add('active');\n            }\n        });\n        \n        // Show utility content\n        this.currentUtility = utilityKey;\n        this.showUtilityContent(utilityKey);\n        \n        // Hide welcome section\n        this.welcomeSection.style.display = 'none';\n        this.utilityContent.style.display = 'block';\n    }\n    \n    showUtilityContent(utilityKey) {\n        const utility = this.utilities[utilityKey];\n        \n        if (utilityKey === 'pdf-to-markdown') {\n            this.utilityContent.innerHTML = this.createPdfToMarkdownUI();\n            this.initPdfToMarkdown();\n        } else {\n            // Coming soon for other utilities\n            this.utilityContent.innerHTML = `\n                <div class=\"utility-interface\">\n                    <h2>${utility.icon} ${utility.name}</h2>\n                    <p>${utility.description}</p>\n                    <div class=\"upload-area\">\n                        <div class=\"upload-icon\">${utility.icon}</div>\n                        <h3>Coming Soon</h3>\n                        <p>This utility is currently under development</p>\n                    </div>\n                </div>\n            `;\n        }\n    }\n    \n    createPdfToMarkdownUI() {\n        return `\n            <div class=\"utility-interface\">\n                <h2>📄 PDF to Markdown Converter</h2>\n                <p>Upload a PDF file and convert it to clean Markdown format</p>\n                \n                <div class=\"upload-area\" id=\"pdf-upload-area\">\n                    <div class=\"upload-icon\">📄</div>\n                    <h3>Drop your PDF here</h3>\n                    <p>Or click to browse files</p>\n                    <input type=\"file\" id=\"pdf-input\" accept=\".pdf\" hidden>\n                    <button class=\"btn\" id=\"browse-btn\">Browse Files</button>\n                </div>\n                \n                <div class=\"conversion-area\" id=\"conversion-area\" style=\"display: none;\">\n                    <div class=\"file-info\">\n                        <div class=\"file-details\">\n                            <div class=\"file-icon\">📄</div>\n                            <div class=\"file-text\">\n                                <div class=\"file-name\" id=\"file-name\"></div>\n                                <div class=\"file-size\" id=\"file-size\"></div>\n                            </div>\n                        </div>\n                        <button class=\"btn\" id=\"convert-btn\">\n                            <span>Convert to Markdown</span>\n                        </button>\n                    </div>\n                    \n                    <div class=\"progress-bar\" id=\"progress-bar\" style=\"display: none;\">\n                        <div class=\"progress-fill\" id=\"progress-fill\"></div>\n                        <div class=\"progress-text\" id=\"progress-text\">Processing...</div>\n                    </div>\n                    \n                    <div class=\"result-section\" id=\"result-section\" style=\"display: none;\">\n                        <div class=\"result-header\">\n                            <h3>Markdown Output</h3>\n                            <div class=\"result-actions\">\n                                <button class=\"btn\" id=\"copy-btn\">Copy</button>\n                                <button class=\"btn\" id=\"download-btn\">Download</button>\n                            </div>\n                        </div>\n                        <div class=\"markdown-output\" id=\"markdown-output\"></div>\n                    </div>\n                </div>\n            </div>\n        `;\n    }\n    \n    initPdfToMarkdown() {\n        // Redirect to the actual PDF converter utility\n        const uploadArea = document.getElementById('pdf-upload-area');\n        if (uploadArea) {\n            uploadArea.addEventListener('click', () => {\n                window.location.href = './utilities/pdf-to-markdown/';\n            });\n        }\n    }\n    \n    toggleSidebar() {\n        this.sidebar.classList.toggle('open');\n    }\n}\n\n// Initialize the chat interface\ndocument.addEventListener('DOMContentLoaded', () => {\n    new UtilitiesChatInterface();\n});
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';\n                }\n            });\n        }, observerOptions);\n        \n        // Observe all utility cards\n        document.querySelectorAll('.utility-card').forEach(card => {\n            observer.observe(card);\n        });\n        \n        // Observe headers\n        document.querySelectorAll('.header').forEach(header => {\n            observer.observe(header);\n        });\n    }\n}\n\n// Initialize the dashboard when DOM is loaded\ndocument.addEventListener('DOMContentLoaded', () => {\n    new UtilitiesDashboard();\n});

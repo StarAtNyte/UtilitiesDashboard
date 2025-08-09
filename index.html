@@ -12,94 +12,151 @@
         <!-- Sidebar -->
         <div class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <h2>Utilities</h2>
+                <h2>Menu</h2>
                 <button class="sidebar-toggle" id="sidebar-toggle">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="6"></line>
+                        <line x1="18" y1="12" x2="6" y2="12"></line>
+                        <line x1="18" y1="18" x2="6" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-section="dashboard">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                    </svg>
+                    <span>Dashboard</span>
+                </a>
+                
+                <a href="#" class="nav-item" data-section="pdf-converter">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14,2 14,8 20,8"></polyline>
+                    </svg>
+                    <span>PDF Converter</span>
+                </a>
+                
+                <a href="#" class="nav-item" data-section="settings">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="m12 1 0 6m0 6 0 6"></path>
+                        <path d="m17.196 5.196-4.242 4.242m-5.908 5.908-4.242 4.242"></path>
+                        <path d="m6.804 5.196 4.242 4.242m5.908 5.908 4.242 4.242"></path>
+                    </svg>
+                    <span>Settings</span>
+                </a>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="mobile-header">
+                <button class="mobile-sidebar-toggle" id="mobile-sidebar-toggle">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <line x1="3" y1="6" x2="21" y2="6"></line>
                         <line x1="3" y1="12" x2="21" y2="12"></line>
                         <line x1="3" y1="18" x2="21" y2="18"></line>
                     </svg>
                 </button>
+                <h1>Utilities Dashboard</h1>
             </div>
-            
-            <div class="utilities-list" id="utilities-list">
-                <div class="utility-item active" data-utility="pdf-to-markdown">
-                    <div class="utility-icon">📄</div>
-                    <div class="utility-info">
-                        <div class="utility-name">PDF to Markdown</div>
-                        <div class="utility-desc">Convert PDFs to MD</div>
-                    </div>
-                </div>
-                
-                <div class="utility-item" data-utility="json-formatter">
-                    <div class="utility-icon">🔧</div>
-                    <div class="utility-info">
-                        <div class="utility-name">JSON Formatter</div>
-                        <div class="utility-desc">Format & validate JSON</div>
-                    </div>
-                </div>
-                
-                <div class="utility-item" data-utility="text-formatter">
-                    <div class="utility-icon">📝</div>
-                    <div class="utility-info">
-                        <div class="utility-name">Text Formatter</div>
-                        <div class="utility-desc">Clean & transform text</div>
-                    </div>
-                </div>
-                
-                <div class="utility-item" data-utility="url-encoder">
-                    <div class="utility-icon">🔗</div>
-                    <div class="utility-info">
-                        <div class="utility-name">URL Encoder</div>
-                        <div class="utility-desc">Encode/decode URLs</div>
-                    </div>
-                </div>
-                
-                <div class="utility-item" data-utility="base64">
-                    <div class="utility-icon">🎯</div>
-                    <div class="utility-info">
-                        <div class="utility-name">Base64</div>
-                        <div class="utility-desc">Base64 encoding/decoding</div>
-                    </div>
-                </div>
-                
-                <div class="utility-item" data-utility="hash-generator">
-                    <div class="utility-icon">🔐</div>
-                    <div class="utility-info">
-                        <div class="utility-name">Hash Generator</div>
-                        <div class="utility-desc">MD5, SHA1, SHA256</div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- Main Content -->
-        <div class="main-content">
-            <div class="chat-interface">
-                <div class="welcome-section" id="welcome-section">
-                    <div class="welcome-content">
-                        <h1>What can I help you with?</h1>
-                        <p>Choose a utility from the sidebar or search below</p>
+            <!-- Dashboard Section -->
+            <div class="content-section active" id="dashboard-section">
+                <div class="container">
+                    <header class="header">
+                        <h1>Utilities</h1>
+                        <p>Essential tools for everyday tasks</p>
+                    </header>
+                    
+                    <main class="grid">
+                        <a href="utilities/pdf-to-markdown/" class="utility-card">
+                            <div class="card-icon">📄</div>
+                            <h3>PDF to Markdown</h3>
+                            <p>Convert PDF documents to clean Markdown format</p>
+                        </a>
+                        
+                        <div class="utility-card coming-soon">
+                            <div class="card-icon">🔧</div>
+                            <h3>JSON Formatter</h3>
+                            <p>Pretty print and validate JSON</p>
+                            <div class="coming-soon-badge">Coming Soon</div>
+                        </div>
+                        
+                        <div class="utility-card coming-soon">
+                            <div class="card-icon">📝</div>
+                            <h3>Text Formatter</h3>
+                            <p>Format, clean, and transform text</p>
+                            <div class="coming-soon-badge">Coming Soon</div>
+                        </div>
+                        
+                        <div class="utility-card coming-soon">
+                            <div class="card-icon">🔗</div>
+                            <h3>URL Encoder</h3>
+                            <p>Encode and decode URLs</p>
+                            <div class="coming-soon-badge">Coming Soon</div>
+                        </div>
+                        
+                        <div class="utility-card coming-soon">
+                            <div class="card-icon">🎯</div>
+                            <h3>Base64</h3>
+                            <p>Encode and decode Base64 strings</p>
+                            <div class="coming-soon-badge">Coming Soon</div>
+                        </div>
+                        
+                        <div class="utility-card coming-soon">
+                            <div class="card-icon">🔐</div>
+                            <h3>Hash Generator</h3>
+                            <p>Generate MD5, SHA1, SHA256 hashes</p>
+                            <div class="coming-soon-badge">Coming Soon</div>
+                        </div>
+                    </main>
+                </div>
+            </div>
+
+            <!-- PDF Converter Section -->
+            <div class="content-section" id="pdf-converter-section">
+                <div class="container">
+                    <header class="header">
+                        <h1>PDF to Markdown</h1>
+                        <p>Convert your PDF documents to clean Markdown format</p>
+                    </header>
+                    
+                    <div class="utility-interface">
+                        <div class="upload-area" onclick="window.open('./utilities/pdf-to-markdown/', '_self')">
+                            <div class="upload-icon">📄</div>
+                            <h3>Launch PDF Converter</h3>
+                            <p>Click to open the full converter interface</p>
+                            <button class="btn">Open Converter</button>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="utility-content" id="utility-content" style="display: none;">
-                    <!-- Utility content will be loaded here -->
-                </div>
-                
-                <div class="search-container">
-                    <div class="search-bar">
-                        <div class="search-input-wrapper">
-                            <input type="text" class="search-input" id="search-input" placeholder="Search utilities or describe what you need...">
-                            <button class="search-btn" id="search-btn">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <circle cx="11" cy="11" r="8"></circle>
-                                    <path d="m21 21-4.35-4.35"></path>
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="search-results" id="search-results" style="display: none;">
-                            <!-- Search results will appear here -->
+            </div>
+
+            <!-- Settings Section -->
+            <div class="content-section" id="settings-section">
+                <div class="container">
+                    <header class="header">
+                        <h1>Settings</h1>
+                        <p>Customize your utilities dashboard</p>
+                    </header>
+                    
+                    <div class="settings-content">
+                        <div class="setting-group">
+                            <h3>Appearance</h3>
+                            <div class="setting-item">
+                                <label>Theme</label>
+                                <select>
+                                    <option>Dark</option>
+                                    <option>Light</option>
+                                    <option>Auto</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
