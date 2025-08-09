@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utility Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Utilities</h1>
+            <p>Essential tools for everyday tasks</p>
+        </header>
+        
+        <main class="grid">
+            <div class="utility-card" data-utility="pdf-to-markdown">
+                <div class="card-icon">📄</div>
+                <h3>PDF to Markdown</h3>
+                <p>Convert PDF documents to Markdown format</p>
+            </div>
+            
+            <div class="utility-card" data-utility="text-formatter">
+                <div class="card-icon">📝</div>
+                <h3>Text Formatter</h3>
+                <p>Format, clean, and transform text</p>
+            </div>
+            
+            <div class="utility-card" data-utility="json-formatter">
+                <div class="card-icon">🔧</div>
+                <h3>JSON Formatter</h3>
+                <p>Pretty print and validate JSON</p>
+            </div>
+            
+            <div class="utility-card" data-utility="url-encoder">
+                <div class="card-icon">🔗</div>
+                <h3>URL Encoder</h3>
+                <p>Encode and decode URLs</p>
+            </div>
+            
+            <div class="utility-card" data-utility="base64">
+                <div class="card-icon">🎯</div>
+                <h3>Base64</h3>
+                <p>Encode and decode Base64 strings</p>
+            </div>
+            
+            <div class="utility-card" data-utility="hash-generator">
+                <div class="card-icon">🔐</div>
+                <h3>Hash Generator</h3>
+                <p>Generate MD5, SHA1, SHA256 hashes</p>
+            </div>
+        </main>
+    </div>
+
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title"></h2>
+                <button class="close-btn" id="close-modal">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <!-- Utility content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
