@@ -9,104 +9,257 @@
 </head>
 <body>
     <div class="app">
-        <!-- Header -->
-        <header class="main-header">
-            <div class="header-content">
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
                 <div class="logo">
                     <div class="logo-icon">⚡</div>
-                    <h1 class="logo-text">Utilities</h1>
-                </div>
-                
-                <nav class="header-nav">
-                    <a href="#" class="nav-link active">Dashboard</a>
-                    <a href="utilities/pdf-to-markdown/" class="nav-link">PDF Converter</a>
-                    <a href="#" class="nav-link">About</a>
-                </nav>
-                
-                <div class="header-actions">
-                    <button class="theme-toggle" id="theme-toggle" title="Toggle theme">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="5"></circle>
-                            <line x1="12" y1="1" x2="12" y2="3"></line>
-                            <line x1="12" y1="21" x2="12" y2="23"></line>
-                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                            <line x1="1" y1="12" x2="3" y2="12"></line>
-                            <line x1="21" y1="12" x2="23" y2="12"></line>
-                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                        </svg>
-                    </button>
-                    
-                    <button class="menu-toggle" id="menu-toggle">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="3" y1="6" x2="21" y2="6"></line>
-                            <line x1="3" y1="12" x2="21" y2="12"></line>
-                            <line x1="3" y1="18" x2="21" y2="18"></line>
-                        </svg>
-                    </button>
+                    <h2 class="logo-text">Utilities</h2>
                 </div>
             </div>
-        </header>
+            
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-section="dashboard">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                    </svg>
+                    <span>Dashboard</span>
+                </a>
+                
+                <a href="#" class="nav-item" data-section="pdf-converter">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14,2 14,8 20,8"></polyline>
+                    </svg>
+                    <span>PDF Converter</span>
+                </a>
+                
+                <a href="#" class="nav-item" data-section="json-formatter">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M7 8h10M7 12h4m1 8H6a2 2 0 01-2-2V4a2 2 0 012-2h8l4 4v12a2 2 0 01-2 2z"></path>
+                    </svg>
+                    <span>JSON Formatter</span>
+                    <div class="coming-soon-pill">Soon</div>
+                </a>
+                
+                <a href="#" class="nav-item" data-section="text-tools">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14,2 14,8 20,8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                    </svg>
+                    <span>Text Tools</span>
+                    <div class="coming-soon-pill">Soon</div>
+                </a>
+                
+                <a href="#" class="nav-item" data-section="encoders">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                    </svg>
+                    <span>Encoders</span>
+                    <div class="coming-soon-pill">Soon</div>
+                </a>
+                
+                <div class="nav-divider"></div>
+                
+                <a href="#" class="nav-item" data-section="settings">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M12 1v6m0 6v6m11-7h-6m-6 0H1"></path>
+                    </svg>
+                    <span>Settings</span>
+                </a>
+                
+                <a href="#" class="nav-item" data-section="about">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                    <span>About</span>
+                </a>
+            </nav>
+        </div>
 
         <!-- Main Content -->
-        <main class="main-content">
-            <div class="container">
-                <section class="hero-section">
-                    <h2 class="hero-title">Essential Tools</h2>
-                    <p class="hero-subtitle">Powerful utilities for everyday tasks</p>
-                </section>
+        <div class="main-content">
+            <div class="mobile-header">
+                <button class="sidebar-toggle" id="sidebar-toggle">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+                <h1>Utilities Dashboard</h1>
+            </div>
+
+            <!-- Dashboard Section -->
+            <div class="content-section active" id="dashboard-section">
+                <div class="page-header">
+                    <h1>Dashboard</h1>
+                    <p>Choose a utility to get started</p>
+                </div>
                 
                 <div class="utilities-grid">
-                    <a href="utilities/pdf-to-markdown/" class="utility-card">
+                    <div class="utility-card" data-section="pdf-converter">
                         <div class="card-icon">📄</div>
                         <h3>PDF to Markdown</h3>
-                        <p>Convert PDF documents to clean Markdown format</p>
-                        <div class="card-arrow">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <line x1="7" y1="17" x2="17" y2="7"></line>
-                                <polyline points="7,7 17,7 17,17"></polyline>
-                            </svg>
-                        </div>
-                    </a>
+                        <p>Convert PDF documents to clean Markdown format with advanced text extraction</p>
+                        <div class="card-status">Available</div>
+                    </div>
                     
-                    <div class="utility-card coming-soon">
+                    <div class="utility-card disabled">
                         <div class="card-icon">🔧</div>
                         <h3>JSON Formatter</h3>
-                        <p>Pretty print and validate JSON</p>
-                        <div class="coming-soon-badge">Coming Soon</div>
+                        <p>Pretty print, validate, and minify JSON data with syntax highlighting</p>
+                        <div class="card-status coming-soon">Coming Soon</div>
                     </div>
                     
-                    <div class="utility-card coming-soon">
+                    <div class="utility-card disabled">
                         <div class="card-icon">📝</div>
-                        <h3>Text Formatter</h3>
-                        <p>Format, clean, and transform text</p>
-                        <div class="coming-soon-badge">Coming Soon</div>
+                        <h3>Text Tools</h3>
+                        <p>Format, clean, transform text with case conversion and cleanup tools</p>
+                        <div class="card-status coming-soon">Coming Soon</div>
                     </div>
                     
-                    <div class="utility-card coming-soon">
+                    <div class="utility-card disabled">
                         <div class="card-icon">🔗</div>
-                        <h3>URL Encoder</h3>
-                        <p>Encode and decode URLs</p>
-                        <div class="coming-soon-badge">Coming Soon</div>
-                    </div>
-                    
-                    <div class="utility-card coming-soon">
-                        <div class="card-icon">🎯</div>
-                        <h3>Base64</h3>
-                        <p>Encode and decode Base64 strings</p>
-                        <div class="coming-soon-badge">Coming Soon</div>
-                    </div>
-                    
-                    <div class="utility-card coming-soon">
-                        <div class="card-icon">🔐</div>
-                        <h3>Hash Generator</h3>
-                        <p>Generate MD5, SHA1, SHA256 hashes</p>
-                        <div class="coming-soon-badge">Coming Soon</div>
+                        <h3>URL & Base64</h3>
+                        <p>Encode, decode URLs and Base64 strings with instant preview</p>
+                        <div class="card-status coming-soon">Coming Soon</div>
                     </div>
                 </div>
             </div>
-        </main>
+
+            <!-- PDF Converter Section -->
+            <div class="content-section" id="pdf-converter-section">
+                <div class="page-header">
+                    <h1>PDF to Markdown Converter</h1>
+                    <p>Convert your PDF documents to clean, formatted Markdown</p>
+                </div>
+                
+                <div class="converter-container">
+                    <div class="converter-card">
+                        <div class="upload-zone" onclick="window.open('./utilities/pdf-to-markdown/', '_self')">
+                            <div class="upload-icon">📄</div>
+                            <h3>Launch PDF Converter</h3>
+                            <p>Click to open the full converter with drag & drop support</p>
+                            <button class="primary-btn">Open Converter</button>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-list">
+                        <h4>Features</h4>
+                        <ul>
+                            <li>✓ Drag & drop PDF files</li>
+                            <li>✓ Advanced text extraction</li>
+                            <li>✓ Preserve formatting</li>
+                            <li>✓ Copy or download results</li>
+                            <li>✓ Progress tracking</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- JSON Formatter Section -->
+            <div class="content-section" id="json-formatter-section">
+                <div class="page-header">
+                    <h1>JSON Formatter</h1>
+                    <p>Format, validate, and work with JSON data</p>
+                </div>
+                
+                <div class="coming-soon-content">
+                    <div class="coming-soon-icon">🔧</div>
+                    <h3>Coming Soon</h3>
+                    <p>JSON formatting and validation tools are currently under development</p>
+                </div>
+            </div>
+
+            <!-- Text Tools Section -->
+            <div class="content-section" id="text-tools-section">
+                <div class="page-header">
+                    <h1>Text Tools</h1>
+                    <p>Transform and format text content</p>
+                </div>
+                
+                <div class="coming-soon-content">
+                    <div class="coming-soon-icon">📝</div>
+                    <h3>Coming Soon</h3>
+                    <p>Text transformation tools are currently under development</p>
+                </div>
+            </div>
+
+            <!-- Encoders Section -->
+            <div class="content-section" id="encoders-section">
+                <div class="page-header">
+                    <h1>Encoders & Decoders</h1>
+                    <p>URL encoding, Base64, and other encoding utilities</p>
+                </div>
+                
+                <div class="coming-soon-content">
+                    <div class="coming-soon-icon">🔗</div>
+                    <h3>Coming Soon</h3>
+                    <p>Encoding and decoding utilities are currently under development</p>
+                </div>
+            </div>
+
+            <!-- Settings Section -->
+            <div class="content-section" id="settings-section">
+                <div class="page-header">
+                    <h1>Settings</h1>
+                    <p>Customize your utilities dashboard</p>
+                </div>
+                
+                <div class="settings-grid">
+                    <div class="settings-card">
+                        <h4>Appearance</h4>
+                        <div class="setting-item">
+                            <label>Theme</label>
+                            <select>
+                                <option>Dark</option>
+                                <option>Light</option>
+                                <option>Auto</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-card">
+                        <h4>Preferences</h4>
+                        <div class="setting-item">
+                            <label>Auto-save results</label>
+                            <input type="checkbox" checked>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- About Section -->
+            <div class="content-section" id="about-section">
+                <div class="page-header">
+                    <h1>About</h1>
+                    <p>Information about this utilities dashboard</p>
+                </div>
+                
+                <div class="about-content">
+                    <div class="about-card">
+                        <h4>Utilities Dashboard</h4>
+                        <p>A collection of essential web utilities for everyday tasks. Built with modern web technologies for optimal performance and user experience.</p>
+                        
+                        <h5>Current Version</h5>
+                        <p>1.0.0</p>
+                        
+                        <h5>Available Tools</h5>
+                        <p>PDF to Markdown converter with more utilities coming soon.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>

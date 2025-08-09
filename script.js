@@ -1,82 +1,210 @@
 class UtilitiesDashboard {
     constructor() {
-        this.themeToggle = document.getElementById('theme-toggle');
-        this.menuToggle = document.getElementById('menu-toggle');
-        this.headerNav = document.querySelector('.header-nav');
+        this.sidebar = document.getElementById('sidebar');
+        this.sidebarToggle = document.getElementById('sidebar-toggle');
+        this.sidebarOverlay = document.querySelector('.sidebar-overlay');
+        this.navItems = document.querySelectorAll('.nav-item');
+        this.contentSections = document.querySelectorAll('.content-section');
         
         this.initEventListeners();
         this.initCardAnimations();
+        this.initNavigation();
     }
     
     initEventListeners() {
-        // Theme toggle (placeholder for future functionality)
-        if (this.themeToggle) {
-            this.themeToggle.addEventListener('click', () => {
-                this.toggleTheme();
+        // Mobile sidebar toggle
+        if (this.sidebarToggle) {
+            this.sidebarToggle.addEventListener('click', () => {
+                this.toggleMobileSidebar();
             });
         }
         
-        // Mobile menu toggle
-        if (this.menuToggle) {
-            this.menuToggle.addEventListener('click', () => {
-                this.toggleMobileMenu();
+        // Sidebar overlay click to close
+        if (this.sidebarOverlay) {
+            this.sidebarOverlay.addEventListener('click', () => {
+                this.closeMobileSidebar();
             });
         }
-        
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (window.innerWidth <= 768) {
-                if (!e.target.closest('.header-nav') && 
-                    !e.target.closest('.menu-toggle') && 
-                    this.headerNav?.classList.contains('open')) {
-                    this.closeMobileMenu();
-                }
-            }
-        });
         
         // Handle window resize
         window.addEventListener('resize', () => {
             if (window.innerWidth > 768) {
-                this.closeMobileMenu();
+                this.closeMobileSidebar();
+            }
+        });
+        
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768) {
+                if (!e.target.closest('.sidebar') && 
+                    !e.target.closest('.sidebar-toggle') && 
+                    this.sidebar?.classList.contains('open')) {
+                    this.closeMobileSidebar();
+                }
             }
         });
     }
     
-    toggleTheme() {
-        // Placeholder for theme switching functionality
-        // Could implement light/dark mode toggle here
-        console.log('Theme toggle clicked - functionality to be implemented');
+    initNavigation() {
+        // Add click event listeners to navigation items
+        this.navItems.forEach(navItem => {
+            navItem.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                const sectionName = navItem.getAttribute('data-section');
+                if (sectionName && !navItem.classList.contains('disabled')) {
+                    this.switchSection(sectionName, navItem);
+                    
+                    // Close mobile sidebar after navigation
+                    if (window.innerWidth <= 768) {
+                        this.closeMobileSidebar();
+                    }
+                }
+            });
+        });
         
-        // Example animation feedback
-        this.themeToggle.style.transform = 'rotate(180deg)';
-        setTimeout(() => {
-            this.themeToggle.style.transform = 'rotate(0deg)';
-        }, 300);
+        // Add click listeners to dashboard cards for navigation
+        const utilityCards = document.querySelectorAll('.utility-card[data-section]');
+        utilityCards.forEach(card => {
+            card.addEventListener('click', (e) => {
+                const sectionName = card.getAttribute('data-section');
+                if (sectionName && !card.classList.contains('disabled')) {
+                    this.switchSection(sectionName);
+                    
+                    // Update sidebar navigation state
+                    const correspondingNavItem = document.querySelector(`.nav-item[data-section="${sectionName}"]`);
+                    if (correspondingNavItem) {
+                        this.setActiveNavItem(correspondingNavItem);
+                    }
+                }
+            });
+        });
     }
     
-    toggleMobileMenu() {
-        if (this.headerNav) {
-            const isOpen = this.headerNav.classList.contains('open');
-            if (isOpen) {
-                this.closeMobileMenu();
-            } else {
-                this.openMobileMenu();
+    switchSection(sectionName, navItem = null) {
+        // Hide all content sections
+        this.contentSections.forEach(section => {
+            section.classList.remove('active');
+        });
+        
+        // Show the target section
+        const targetSection = document.getElementById(`${sectionName}-section`);
+        if (targetSection) {
+            targetSection.classList.add('active');
+            
+            // Trigger animation for the section content
+            this.animateSectionContent(targetSection);
+        }
+        
+        // Update navigation state if navItem is provided
+        if (navItem) {
+            this.setActiveNavItem(navItem);
+        }
+        
+        // Update page title
+        this.updatePageTitle(sectionName);
+    }
+    
+    setActiveNavItem(activeNavItem) {
+        // Remove active class from all nav items
+        this.navItems.forEach(item => {
+            item.classList.remove('active');
+        });
+        
+        // Add active class to the clicked item
+        activeNavItem.classList.add('active');
+    }
+    
+    updatePageTitle(sectionName) {
+        const titles = {
+            'dashboard': 'Dashboard',
+            'pdf-converter': 'PDF Converter',
+            'json-formatter': 'JSON Formatter',
+            'text-tools': 'Text Tools',
+            'encoders': 'Encoders',
+            'settings': 'Settings',
+            'about': 'About'
+        };
+        
+        const title = titles[sectionName] || 'Utilities Dashboard';
+        document.title = title + ' - Utilities Dashboard';
+    }
+    
+    animateSectionContent(section) {
+        // Reset and trigger animation for section content
+        const animatedElements = section.querySelectorAll('.page-header, .utilities-grid, .converter-container, .coming-soon-content, .settings-grid, .about-content');
+        
+        animatedElements.forEach((element, index) => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                element.style.opacity = '1';
+                element.style.transform = 'translateY(0)';
+            }, index * 100);
+        });
+    }
+    
+    toggleMobileSidebar() {
+        if (this.sidebar?.classList.contains('open')) {
+            this.closeMobileSidebar();
+        } else {
+            this.openMobileSidebar();
+        }
+    }
+    
+    openMobileSidebar() {
+        if (this.sidebar) {
+            this.sidebar.classList.add('open');
+            
+            // Create overlay if it doesn't exist
+            if (!this.sidebarOverlay) {
+                this.createSidebarOverlay();
             }
+            
+            if (this.sidebarOverlay) {
+                this.sidebarOverlay.classList.add('active');
+            }
+            
+            // Update toggle button state
+            if (this.sidebarToggle) {
+                this.sidebarToggle.setAttribute('aria-expanded', 'true');
+            }
+            
+            // Prevent body scrolling
+            document.body.style.overflow = 'hidden';
         }
     }
     
-    openMobileMenu() {
-        if (this.headerNav) {
-            this.headerNav.classList.add('open');
-            this.menuToggle.setAttribute('aria-expanded', 'true');
+    closeMobileSidebar() {
+        if (this.sidebar) {
+            this.sidebar.classList.remove('open');
+            
+            if (this.sidebarOverlay) {
+                this.sidebarOverlay.classList.remove('active');
+            }
+            
+            // Update toggle button state
+            if (this.sidebarToggle) {
+                this.sidebarToggle.setAttribute('aria-expanded', 'false');
+            }
+            
+            // Restore body scrolling
+            document.body.style.overflow = '';
         }
     }
     
-    closeMobileMenu() {
-        if (this.headerNav) {
-            this.headerNav.classList.remove('open');
-            this.menuToggle.setAttribute('aria-expanded', 'false');
-        }
+    createSidebarOverlay() {
+        const overlay = document.createElement('div');
+        overlay.className = 'sidebar-overlay';
+        document.body.appendChild(overlay);
+        
+        overlay.addEventListener('click', () => {
+            this.closeMobileSidebar();
+        });
+        
+        this.sidebarOverlay = overlay;
     }
     
     initCardAnimations() {
@@ -87,7 +215,7 @@ class UtilitiesDashboard {
             card.style.animationDelay = `${0.1 * index}s`;
             
             // Enhanced hover effects for active cards
-            if (!card.classList.contains('coming-soon')) {
+            if (!card.classList.contains('disabled')) {
                 this.addCardInteractions(card);
             }
         });
@@ -101,11 +229,13 @@ class UtilitiesDashboard {
     addCardInteractions(card) {
         // Enhanced hover effects
         card.addEventListener('mouseenter', () => {
-            card.style.filter = 'brightness(1.05)';
-            
-            // Add subtle vibration effect for touch devices
-            if ('vibrate' in navigator) {
-                navigator.vibrate(10);
+            if (!card.classList.contains('disabled')) {
+                card.style.filter = 'brightness(1.05)';
+                
+                // Add subtle vibration effect for touch devices
+                if ('vibrate' in navigator) {
+                    navigator.vibrate(10);
+                }
             }
         });
         
@@ -115,7 +245,9 @@ class UtilitiesDashboard {
         
         // Click ripple effect
         card.addEventListener('click', (e) => {
-            this.createClickRipple(e, card);
+            if (!card.classList.contains('disabled')) {
+                this.createClickRipple(e, card);
+            }
         });
     }
     
@@ -172,9 +304,6 @@ class UtilitiesDashboard {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    // Trigger animation
-                    entry.target.style.animationPlayState = 'running';
-                    
                     // Add visible class for additional styling
                     entry.target.classList.add('visible');
                     
@@ -197,7 +326,7 @@ class UtilitiesDashboard {
         }, observerOptions);
         
         // Observe all animatable elements
-        document.querySelectorAll('.utility-card, .hero-section').forEach(el => {
+        document.querySelectorAll('.utility-card, .page-header').forEach(el => {
             observer.observe(el);
         });
     }
@@ -207,7 +336,7 @@ class UtilitiesDashboard {
 document.addEventListener('DOMContentLoaded', () => {
     new UtilitiesDashboard();
     
-    // Add custom cursor effect for premium feel
+    // Add custom cursor effect for premium feel on desktop
     if (window.innerWidth > 768) {
         initCustomCursor();
     }
