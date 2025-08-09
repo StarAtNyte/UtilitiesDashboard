@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Encoder/Decoder</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <nav class="nav">
+            <a href="../../" class="back-btn">← Back to Dashboard</a>
+        </nav>
+        
+        <header class="header">
+            <h1>URL Encoder/Decoder</h1>
+            <p>Encode and decode URLs and Base64 strings</p>
+        </header>
+        
+        <main class="url-encoder">
+            <div class="tool-section">
+                <h2>URL Encoder/Decoder</h2>
+                <div class="encoder-container">
+                    <div class="input-group">
+                        <label for="url-input">Input Text/URL</label>
+                        <textarea id="url-input" placeholder="Enter text or URL to encode/decode..."></textarea>
+                    </div>
+                    
+                    <div class="button-group">
+                        <button class="primary-btn" id="encode-url-btn">
+                            <i class="fas fa-lock"></i> Encode URL
+                        </button>
+                        <button class="secondary-btn" id="decode-url-btn">
+                            <i class="fas fa-unlock"></i> Decode URL
+                        </button>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="url-output">Output</label>
+                        <textarea id="url-output" placeholder="Output will appear here..." readonly></textarea>
+                    </div>
+                    
+                    <div class="action-group">
+                        <button class="action-btn" id="copy-url-btn">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                        <button class="action-btn" id="clear-url-btn">
+                            <i class="fas fa-eraser"></i> Clear
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tool-section">
+                <h2>Base64 Encoder/Decoder</h2>
+                <div class="encoder-container">
+                    <div class="input-group">
+                        <label for="base64-input">Input Text/Base64</label>
+                        <textarea id="base64-input" placeholder="Enter text to encode or Base64 to decode..."></textarea>
+                    </div>
+                    
+                    <div class="button-group">
+                        <button class="primary-btn" id="encode-base64-btn">
+                            <i class="fas fa-lock"></i> Encode Base64
+                        </button>
+                        <button class="secondary-btn" id="decode-base64-btn">
+                            <i class="fas fa-unlock"></i> Decode Base64
+                        </button>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="base64-output">Output</label>
+                        <textarea id="base64-output" placeholder="Output will appear here..." readonly></textarea>
+                    </div>
+                    
+                    <div class="action-group">
+                        <button class="action-btn" id="copy-base64-btn">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                        <button class="action-btn" id="clear-base64-btn">
+                            <i class="fas fa-eraser"></i> Clear
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tool-section">
+                <h2>URL Parser</h2>
+                <div class="encoder-container">
+                    <div class="input-group">
+                        <label for="url-parser-input">URL to Parse</label>
+                        <input type="text" id="url-parser-input" placeholder="Enter a full URL to parse...">
+                    </div>
+                    
+                    <button class="primary-btn" id="parse-url-btn">
+                        <i class="fas fa-search"></i> Parse URL
+                    </button>
+                    
+                    <div class="parsed-url-container">
+                        <div class="parsed-item">
+                            <span class="parsed-label">Protocol:</span>
+                            <span class="parsed-value" id="parsed-protocol">-</span>
+                        </div>
+                        <div class="parsed-item">
+                            <span class="parsed-label">Hostname:</span>
+                            <span class="parsed-value" id="parsed-hostname">-</span>
+                        </div>
+                        <div class="parsed-item">
+                            <span class="parsed-label">Port:</span>
+                            <span class="parsed-value" id="parsed-port">-</span>
+                        </div>
+                        <div class="parsed-item">
+                            <span class="parsed-label">Path:</span>
+                            <span class="parsed-value" id="parsed-path">-</span>
+                        </div>
+                        <div class="parsed-item">
+                            <span class="parsed-label">Query:</span>
+                            <span class="parsed-value" id="parsed-query">-</span>
+                        </div>
+                        <div class="parsed-item">
+                            <span class="parsed-label">Fragment:</span>
+                            <span class="parsed-value" id="parsed-fragment">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

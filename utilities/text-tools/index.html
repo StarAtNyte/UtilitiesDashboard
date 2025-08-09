@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Tools</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <nav class="nav">
+            <a href="../../" class="back-btn">← Back to Dashboard</a>
+        </nav>
+        
+        <header class="header">
+            <h1>Text Tools</h1>
+            <p>Transform and format text content</p>
+        </header>
+        
+        <main class="text-tools">
+            <div class="editor-container">
+                <div class="editor-header">
+                    <h3>Input Text</h3>
+                    <div class="editor-actions">
+                        <button class="action-btn" id="clear-input-btn">
+                            <i class="fas fa-eraser"></i> Clear
+                        </button>
+                        <button class="action-btn" id="sample-text-btn">
+                            <i class="fas fa-file-alt"></i> Sample
+                        </button>
+                    </div>
+                </div>
+                <textarea id="input-text" placeholder="Enter your text here..."></textarea>
+            </div>
+            
+            <div class="tools-container">
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <h4>Case Conversion</h4>
+                        <div class="tool-buttons">
+                            <button class="tool-btn" data-action="uppercase">
+                                <i class="fas fa-text-height"></i> Uppercase
+                            </button>
+                            <button class="tool-btn" data-action="lowercase">
+                                <i class="fas fa-text-width"></i> Lowercase
+                            </button>
+                            <button class="tool-btn" data-action="titlecase">
+                                <i class="fas fa-font"></i> Title Case
+                            </button>
+                            <button class="tool-btn" data-action="sentencecase">
+                                <i class="fas fa-paragraph"></i> Sentence
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <h4>Text Formatting</h4>
+                        <div class="tool-buttons">
+                            <button class="tool-btn" data-action="remove-extra-spaces">
+                                <i class="fas fa-compress-alt"></i> Remove Extra Spaces
+                            </button>
+                            <button class="tool-btn" data-action="remove-line-breaks">
+                                <i class="fas fa-minus"></i> Remove Line Breaks
+                            </button>
+                            <button class="tool-btn" data-action="add-line-breaks">
+                                <i class="fas fa-plus"></i> Add Line Breaks
+                            </button>
+                            <button class="tool-btn" data-action="reverse-text">
+                                <i class="fas fa-exchange-alt"></i> Reverse Text
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <h4>Text Analysis</h4>
+                        <div class="tool-buttons">
+                            <button class="tool-btn" data-action="word-count">
+                                <i class="fas fa-hashtag"></i> Word Count
+                            </button>
+                            <button class="tool-btn" data-action="character-count">
+                                <i class="fas fa-font"></i> Character Count
+                            </button>
+                            <button class="tool-btn" data-action="sort-lines">
+                                <i class="fas fa-sort"></i> Sort Lines
+                            </button>
+                            <button class="tool-btn" data-action="remove-duplicates">
+                                <i class="fas fa-clone"></i> Remove Duplicates
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <h4>Special Tools</h4>
+                        <div class="tool-buttons">
+                            <button class="tool-btn" data-action="reverse-words">
+                                <i class="fas fa-exchange-alt"></i> Reverse Words
+                            </button>
+                            <button class="tool-btn" data-action="shuffle-words">
+                                <i class="fas fa-random"></i> Shuffle Words
+                            </button>
+                            <button class="tool-btn" data-action="camelcase">
+                                <i class="fas fa-copyright"></i> Camel Case
+                            </button>
+                            <button class="tool-btn" data-action="snakecase">
+                                <i class="fas fa-minus"></i> Snake Case
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="editor-container">
+                <div class="editor-header">
+                    <h3>Output Text</h3>
+                    <div class="editor-actions">
+                        <button class="action-btn" id="copy-output-btn">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                        <button class="action-btn" id="clear-output-btn">
+                            <i class="fas fa-eraser"></i> Clear
+                        </button>
+                    </div>
+                </div>
+                <textarea id="output-text" placeholder="Output will appear here..." readonly></textarea>
+            </div>
+            
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-value" id="word-count">0</div>
+                    <div class="stat-label">Words</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="character-count">0</div>
+                    <div class="stat-label">Characters</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="line-count">0</div>
+                    <div class="stat-label">Lines</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="paragraph-count">0</div>
+                    <div class="stat-label">Paragraphs</div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -121,6 +121,7 @@ class UtilitiesDashboard {
             'pdf-converter': 'PDF Converter',
             'json-formatter': 'JSON Formatter',
             'text-tools': 'Text Tools',
+            'url-encoder': 'URL Encoder',
             'encoders': 'Encoders',
             'settings': 'Settings',
             'about': 'About'

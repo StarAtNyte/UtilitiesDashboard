@@ -42,7 +42,6 @@
                         <path d="M7 8h10M7 12h4m1 8H6a2 2 0 01-2-2V4a2 2 0 012-2h8l4 4v12a2 2 0 01-2 2z"></path>
                     </svg>
                     <span>JSON Formatter</span>
-                    <div class="coming-soon-pill">Soon</div>
                 </a>
                 
                 <a href="#" class="nav-item" data-section="text-tools">
@@ -53,13 +52,20 @@
                         <line x1="16" y1="17" x2="8" y2="17"></line>
                     </svg>
                     <span>Text Tools</span>
-                    <div class="coming-soon-pill">Soon</div>
+                </a>
+                
+                <a href="#" class="nav-item" data-section="url-encoder">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                    </svg>
+                    <span>URL Encoder</span>
                 </a>
                 
                 <a href="#" class="nav-item" data-section="encoders">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                        <path d="M4 4h16v16H4z"></path>
+                        <path d="M8 8h8v8H8z"></path>
                     </svg>
                     <span>Encoders</span>
                     <div class="coming-soon-pill">Soon</div>
@@ -114,25 +120,25 @@
                         <div class="card-status">Available</div>
                     </div>
                     
-                    <div class="utility-card disabled">
+                    <div class="utility-card" data-section="json-formatter">
                         <div class="card-icon">🔧</div>
                         <h3>JSON Formatter</h3>
                         <p>Pretty print, validate, and minify JSON data with syntax highlighting</p>
-                        <div class="card-status coming-soon">Coming Soon</div>
+                        <div class="card-status">Available</div>
                     </div>
                     
-                    <div class="utility-card disabled">
+                    <div class="utility-card" data-section="text-tools">
                         <div class="card-icon">📝</div>
                         <h3>Text Tools</h3>
                         <p>Format, clean, transform text with case conversion and cleanup tools</p>
-                        <div class="card-status coming-soon">Coming Soon</div>
+                        <div class="card-status">Available</div>
                     </div>
                     
-                    <div class="utility-card disabled">
+                    <div class="utility-card" data-section="url-encoder">
                         <div class="card-icon">🔗</div>
-                        <h3>URL & Base64</h3>
+                        <h3>URL Encoder</h3>
                         <p>Encode, decode URLs and Base64 strings with instant preview</p>
-                        <div class="card-status coming-soon">Coming Soon</div>
+                        <div class="card-status">Available</div>
                     </div>
                 </div>
             </div>
@@ -174,10 +180,26 @@
                     <p>Format, validate, and work with JSON data</p>
                 </div>
                 
-                <div class="coming-soon-content">
-                    <div class="coming-soon-icon">🔧</div>
-                    <h3>Coming Soon</h3>
-                    <p>JSON formatting and validation tools are currently under development</p>
+                <div class="converter-container">
+                    <div class="converter-card">
+                        <div class="upload-zone" onclick="window.open('./utilities/json-formatter/', '_self')">
+                            <div class="upload-icon">🔧</div>
+                            <h3>Launch JSON Formatter</h3>
+                            <p>Click to open the full JSON formatter with advanced options</p>
+                            <button class="primary-btn">Open JSON Formatter</button>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-list">
+                        <h4>Features</h4>
+                        <ul>
+                            <li>✓ Format and pretty print JSON</li>
+                            <li>✓ Validate JSON syntax</li>
+                            <li>✓ Sort object keys</li>
+                            <li>✓ Custom indentation</li>
+                            <li>✓ Copy and download results</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
@@ -188,10 +210,56 @@
                     <p>Transform and format text content</p>
                 </div>
                 
-                <div class="coming-soon-content">
-                    <div class="coming-soon-icon">📝</div>
-                    <h3>Coming Soon</h3>
-                    <p>Text transformation tools are currently under development</p>
+                <div class="converter-container">
+                    <div class="converter-card">
+                        <div class="upload-zone" onclick="window.open('./utilities/text-tools/', '_self')">
+                            <div class="upload-icon">📝</div>
+                            <h3>Launch Text Tools</h3>
+                            <p>Click to open the full text transformation toolkit</p>
+                            <button class="primary-btn">Open Text Tools</button>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-list">
+                        <h4>Features</h4>
+                        <ul>
+                            <li>✓ Case conversion (upper, lower, title, sentence)</li>
+                            <li>✓ Text cleaning and formatting</li>
+                            <li>✓ Line and word manipulation</li>
+                            <li>✓ Text analysis and statistics</li>
+                            <li>✓ Special transformations</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- URL Encoder Section -->
+            <div class="content-section" id="url-encoder-section">
+                <div class="page-header">
+                    <h1>URL Encoder/Decoder</h1>
+                    <p>Encode and decode URLs and Base64 strings</p>
+                </div>
+                
+                <div class="converter-container">
+                    <div class="converter-card">
+                        <div class="upload-zone" onclick="window.open('./utilities/url-encoder/', '_self')">
+                            <div class="upload-icon">🔗</div>
+                            <h3>Launch URL Encoder</h3>
+                            <p>Click to open the URL encoder with advanced options</p>
+                            <button class="primary-btn">Open URL Encoder</button>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-list">
+                        <h4>Features</h4>
+                        <ul>
+                            <li>✓ URL encoding and decoding</li>
+                            <li>✓ Base64 encoding and decoding</li>
+                            <li>✓ URL parsing and analysis</li>
+                            <li>✓ Copy to clipboard</li>
+                            <li>✓ Real-time processing</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
@@ -199,13 +267,13 @@
             <div class="content-section" id="encoders-section">
                 <div class="page-header">
                     <h1>Encoders & Decoders</h1>
-                    <p>URL encoding, Base64, and other encoding utilities</p>
+                    <p>Additional encoding utilities</p>
                 </div>
                 
                 <div class="coming-soon-content">
-                    <div class="coming-soon-icon">🔗</div>
+                    <div class="coming-soon-icon">🔒</div>
                     <h3>Coming Soon</h3>
-                    <p>Encoding and decoding utilities are currently under development</p>
+                    <p>More encoding and decoding utilities are under development</p>
                 </div>
             </div>
 

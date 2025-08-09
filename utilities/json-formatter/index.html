@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Formatter</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <nav class="nav">
+            <a href="../../" class="back-btn">← Back to Dashboard</a>
+        </nav>
+        
+        <header class="header">
+            <h1>JSON Formatter</h1>
+            <p>Format, validate, and work with JSON data</p>
+        </header>
+        
+        <main class="json-formatter">
+            <div class="editor-container">
+                <div class="editor-header">
+                    <h3>JSON Input</h3>
+                    <div class="editor-actions">
+                        <button class="action-btn" id="clear-btn">
+                            <i class="fas fa-eraser"></i> Clear
+                        </button>
+                        <button class="action-btn" id="sample-btn">
+                            <i class="fas fa-file-code"></i> Sample
+                        </button>
+                    </div>
+                </div>
+                <textarea id="json-input" placeholder="Enter your JSON here..."></textarea>
+            </div>
+            
+            <div class="controls">
+                <div class="control-group">
+                    <label for="indent-size">Indent Size</label>
+                    <select id="indent-size">
+                        <option value="2">2 spaces</option>
+                        <option value="4" selected>4 spaces</option>
+                        <option value="tab">Tab</option>
+                    </select>
+                </div>
+                
+                <div class="control-group">
+                    <label for="sort-keys">Sort Keys</label>
+                    <input type="checkbox" id="sort-keys">
+                </div>
+                
+                <button class="primary-btn" id="format-btn">
+                    <i class="fas fa-magic"></i> Format JSON
+                </button>
+                
+                <button class="secondary-btn" id="validate-btn">
+                    <i class="fas fa-check-circle"></i> Validate
+                </button>
+            </div>
+            
+            <div class="editor-container">
+                <div class="editor-header">
+                    <h3>Formatted Output</h3>
+                    <div class="editor-actions">
+                        <button class="action-btn" id="copy-btn">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                        <button class="action-btn" id="download-btn">
+                            <i class="fas fa-download"></i> Download
+                        </button>
+                    </div>
+                </div>
+                <div class="output-container">
+                    <pre id="json-output"></pre>
+                </div>
+            </div>
+            
+            <div class="status-bar">
+                <div class="status-item">
+                    <span class="status-label">Status:</span>
+                    <span class="status-value" id="status-text">Ready</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Size:</span>
+                    <span class="status-value" id="size-text">0 bytes</span>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
