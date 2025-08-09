@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF to Markdown Converter</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <nav class="nav">
+            <a href="../../" class="back-btn">← Back to Dashboard</a>
+        </nav>
+        
+        <header class="header">
+            <h1>PDF to Markdown</h1>
+            <p>Convert your PDF documents to clean Markdown format</p>
+        </header>
+        
+        <main class="converter">
+            <div class="upload-area" id="upload-area">
+                <div class="upload-icon">📄</div>
+                <h3>Drop your PDF here</h3>
+                <p>Or click to browse files</p>
+                <input type="file" id="pdf-input" accept=".pdf" hidden>
+                <button class="browse-btn" id="browse-btn">Browse Files</button>
+            </div>
+            
+            <div class="conversion-area" id="conversion-area" style="display: none;">
+                <div class="file-info">
+                    <div class="file-details">
+                        <div class="file-icon">📄</div>
+                        <div class="file-text">
+                            <div class="file-name" id="file-name"></div>
+                            <div class="file-size" id="file-size"></div>
+                        </div>
+                    </div>
+                    <button class="convert-btn" id="convert-btn">
+                        <span>Convert to Markdown</span>
+                    </button>
+                </div>
+                
+                <div class="progress-bar" id="progress-bar" style="display: none;">
+                    <div class="progress-fill" id="progress-fill"></div>
+                    <div class="progress-text" id="progress-text">Processing...</div>
+                </div>
+                
+                <div class="result-section" id="result-section" style="display: none;">
+                    <div class="result-header">
+                        <h3>Markdown Output</h3>
+                        <div class="result-actions">
+                            <button class="action-btn" id="copy-btn">Copy</button>
+                            <button class="action-btn" id="download-btn">Download</button>
+                        </div>
+                    </div>
+                    <div class="markdown-output" id="markdown-output"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

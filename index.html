@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Utility Dashboard</title>
+    <title>Utilities Dashboard</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
@@ -15,57 +15,49 @@
         </header>
         
         <main class="grid">
-            <div class="utility-card" data-utility="pdf-to-markdown">
+            <a href="utilities/pdf-to-markdown/" class="utility-card">
                 <div class="card-icon">📄</div>
                 <h3>PDF to Markdown</h3>
-                <p>Convert PDF documents to Markdown format</p>
-            </div>
+                <p>Convert PDF documents to clean Markdown format</p>
+            </a>
             
-            <div class="utility-card" data-utility="text-formatter">
-                <div class="card-icon">📝</div>
-                <h3>Text Formatter</h3>
-                <p>Format, clean, and transform text</p>
-            </div>
-            
-            <div class="utility-card" data-utility="json-formatter">
+            <div class="utility-card coming-soon">
                 <div class="card-icon">🔧</div>
                 <h3>JSON Formatter</h3>
                 <p>Pretty print and validate JSON</p>
+                <div class="coming-soon-badge">Coming Soon</div>
             </div>
             
-            <div class="utility-card" data-utility="url-encoder">
+            <div class="utility-card coming-soon">
+                <div class="card-icon">📝</div>
+                <h3>Text Formatter</h3>
+                <p>Format, clean, and transform text</p>
+                <div class="coming-soon-badge">Coming Soon</div>
+            </div>
+            
+            <div class="utility-card coming-soon">
                 <div class="card-icon">🔗</div>
                 <h3>URL Encoder</h3>
                 <p>Encode and decode URLs</p>
+                <div class="coming-soon-badge">Coming Soon</div>
             </div>
             
-            <div class="utility-card" data-utility="base64">
+            <div class="utility-card coming-soon">
                 <div class="card-icon">🎯</div>
                 <h3>Base64</h3>
                 <p>Encode and decode Base64 strings</p>
+                <div class="coming-soon-badge">Coming Soon</div>
             </div>
             
-            <div class="utility-card" data-utility="hash-generator">
+            <div class="utility-card coming-soon">
                 <div class="card-icon">🔐</div>
                 <h3>Hash Generator</h3>
                 <p>Generate MD5, SHA1, SHA256 hashes</p>
+                <div class="coming-soon-badge">Coming Soon</div>
             </div>
         </main>
     </div>
 
-    <div class="modal" id="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 id="modal-title"></h2>
-                <button class="close-btn" id="close-modal">&times;</button>
-            </div>
-            <div class="modal-body" id="modal-body">
-                <!-- Utility content will be loaded here -->
-            </div>
-        </div>
-    </div>
-
-    <script src="particles.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
