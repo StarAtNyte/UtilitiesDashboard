@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pinterest Pin Downloader</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <nav class="nav">
+            <a href="../../" class="back-btn">← Back to Dashboard</a>
+        </nav>
+        
+        <header class="header">
+            <h1>Pinterest Pin Downloader</h1>
+            <p>Download recommended and similar images from Pinterest pins</p>
+        </header>
+        
+        <main class="downloader">
+            <div class="input-area">
+                <div class="url-input-section">
+                    <label for="pinterest-url">Pinterest Pin URL</label>
+                    <div class="input-group">
+                        <input 
+                            type="url" 
+                            id="pinterest-url" 
+                            placeholder="https://www.pinterest.com/pin/36873290700849695"
+                            value="https://www.pinterest.com/pin/36873290700849695"
+                        >
+                        <button class="fetch-btn" id="fetch-btn">
+                            <span>Fetch Images</span>
+                        </button>
+                    </div>
+                    <div class="url-help">
+                        Enter a Pinterest pin URL to extract similar and recommended images
+                    </div>
+                </div>
+            </div>
+            
+            <div class="progress-section" id="progress-section" style="display: none;">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <div class="progress-text" id="progress-text">Fetching pin data...</div>
+            </div>
+            
+            <div class="results-section" id="results-section" style="display: none;">
+                <div class="results-header">
+                    <h3>Found Images</h3>
+                    <div class="results-actions">
+                        <button class="action-btn" id="select-all-btn">Select All</button>
+                        <button class="action-btn primary" id="download-selected-btn" disabled>Download Selected</button>
+                    </div>
+                </div>
+                
+                <div class="filter-section">
+                    <div class="filter-options">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="main">Main Pin</button>
+                        <button class="filter-btn" data-filter="similar">Similar</button>
+                        <button class="filter-btn" data-filter="recommended">Recommended</button>
+                    </div>
+                    <div class="image-count" id="image-count">0 images found</div>
+                </div>
+                
+                <div class="images-grid" id="images-grid"></div>
+            </div>
+            
+            <div class="error-section" id="error-section" style="display: none;">
+                <div class="error-icon">⚠️</div>
+                <h3>Error</h3>
+                <p id="error-message">Something went wrong while fetching the pin data.</p>
+                <button class="retry-btn" id="retry-btn">Try Again</button>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

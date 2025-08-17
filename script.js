@@ -122,6 +122,7 @@ class UtilitiesDashboard {
             'json-formatter': 'JSON Formatter',
             'text-tools': 'Text Tools',
             'url-encoder': 'URL Encoder',
+            'pinterest-downloader': 'Pinterest Downloader',
             'encoders': 'Encoders',
             'settings': 'Settings',
             'about': 'About'

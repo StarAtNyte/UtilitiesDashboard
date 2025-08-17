@@ -14,6 +14,7 @@ class PDFToMarkdownConverter {
         this.markdownOutput = document.getElementById('markdown-output');
         this.copyBtn = document.getElementById('copy-btn');
         this.downloadBtn = document.getElementById('download-btn');
+        this.restartBtn = document.getElementById('restart-btn');
         
         this.currentFile = null;
         this.markdownContent = '';
@@ -49,6 +50,9 @@ class PDFToMarkdownConverter {
         // Result actions
         this.copyBtn.addEventListener('click', () => this.copyToClipboard());
         this.downloadBtn.addEventListener('click', () => this.downloadMarkdown());
+        
+        // Restart button
+        this.restartBtn.addEventListener('click', () => this.restart());
     }
     
     handleDragOver(e) {
@@ -352,6 +356,37 @@ class PDFToMarkdownConverter {
         setTimeout(() => {
             errorDiv.remove();
         }, 5000);
+    }
+    
+    restart() {
+        // Reset all state
+        this.currentFile = null;
+        this.markdownContent = '';
+        
+        // Reset form inputs
+        this.pdfInput.value = '';
+        
+        // Reset UI to initial state
+        this.uploadArea.style.display = 'block';
+        this.conversionArea.style.display = 'none';
+        this.progressBar.style.display = 'none';
+        this.resultSection.style.display = 'none';
+        
+        // Remove any error notifications
+        const errorDivs = document.querySelectorAll('[data-error-animation]');
+        errorDivs.forEach(div => div.remove());
+        
+        // Reset button states
+        this.setConvertButtonLoading(false);
+        this.copyBtn.classList.remove('success');
+        this.downloadBtn.classList.remove('success');
+        
+        // Reset progress
+        this.progressFill.style.width = '0%';
+        this.progressText.textContent = '';
+        
+        // Clear output
+        this.markdownOutput.textContent = '';
     }
 }
 
