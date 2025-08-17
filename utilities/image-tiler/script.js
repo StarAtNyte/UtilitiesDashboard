@@ -252,7 +252,7 @@ class ImageTiler {
         }
     }
 
-    async createTiles(file, rows, cols, overlap, format, prefix = 'tile') {
+    async createTiles(file, rows, cols, overlap, format, prefix = 'tiled') {
         return new Promise((resolve, reject) => {
             const img = new Image();
             img.onload = () => {
@@ -260,38 +260,41 @@ class ImageTiler {
                     const canvas = document.createElement('canvas');
                     const ctx = canvas.getContext('2d');
                     
-                    const tileWidth = Math.floor(img.width / cols);
-                    const tileHeight = Math.floor(img.height / rows);
-                    const tiles = [];
-
+                    // Calculate the tiled canvas size
+                    const tiledWidth = img.width * cols + overlap * (cols - 1);
+                    const tiledHeight = img.height * rows + overlap * (rows - 1);
+                    
+                    canvas.width = tiledWidth;
+                    canvas.height = tiledHeight;
+                    
+                    // Clear canvas with white background
+                    ctx.fillStyle = 'white';
+                    ctx.fillRect(0, 0, tiledWidth, tiledHeight);
+                    
+                    // Draw the image tiled across the canvas
                     for (let row = 0; row < rows; row++) {
                         for (let col = 0; col < cols; col++) {
-                            const x = Math.max(0, col * tileWidth - overlap);
-                            const y = Math.max(0, row * tileHeight - overlap);
-                            const w = Math.min(tileWidth + overlap * 2, img.width - x);
-                            const h = Math.min(tileHeight + overlap * 2, img.height - y);
-
-                            canvas.width = w;
-                            canvas.height = h;
+                            const x = col * (img.width + overlap);
+                            const y = row * (img.height + overlap);
                             
-                            ctx.drawImage(img, x, y, w, h, 0, 0, w, h);
-                            
-                            canvas.toBlob((blob) => {
-                                const tileName = `${prefix}_${row + 1}_${col + 1}.${format}`;
-                                tiles.push({
-                                    name: tileName,
-                                    blob: blob,
-                                    url: URL.createObjectURL(blob),
-                                    size: blob.size,
-                                    dimensions: `${w} × ${h}px`
-                                });
-
-                                if (tiles.length === rows * cols) {
-                                    resolve(tiles);
-                                }
-                            }, `image/${format}`, format === 'jpeg' ? 0.9 : undefined);
+                            ctx.drawImage(img, x, y, img.width, img.height);
                         }
                     }
+                    
+                    canvas.toBlob((blob) => {
+                        const tileName = `${prefix}_${rows}x${cols}_tiled.${format}`;
+                        const tiles = [{
+                            name: tileName,
+                            blob: blob,
+                            url: URL.createObjectURL(blob),
+                            size: blob.size,
+                            dimensions: `${tiledWidth} × ${tiledHeight}px`,
+                            originalSize: `${img.width} × ${img.height}px`,
+                            tileCount: rows * cols
+                        }];
+                        
+                        resolve(tiles);
+                    }, `image/${format}`, format === 'jpeg' ? 0.9 : undefined);
                 } catch (error) {
                     reject(error);
                 }
@@ -328,15 +331,28 @@ class ImageTiler {
         this.generatedTiles.forEach((tile, index) => {
             const tileItem = document.createElement('div');
             tileItem.className = 'tile-item';
-            tileItem.innerHTML = `
+            
+            let infoHtml = `
                 <img src="${tile.url}" alt="${tile.name}" class="tile-image">
                 <div class="tile-info">
                     <div class="tile-name">${tile.name}</div>
                     <div class="tile-size">${this.formatFileSize(tile.size)}</div>
                 </div>
-                <div class="tile-size">${tile.dimensions}</div>
+                <div class="tile-details">
+                    <div class="tile-dimension">Final: ${tile.dimensions}</div>`;
+            
+            if (tile.originalSize) {
+                infoHtml += `<div class="tile-original">Original: ${tile.originalSize}</div>`;
+            }
+            if (tile.tileCount) {
+                infoHtml += `<div class="tile-count">Tiles: ${tile.tileCount}</div>`;
+            }
+            
+            infoHtml += `</div>
                 <button class="tile-download" data-index="${index}">Download</button>
             `;
+            
+            tileItem.innerHTML = infoHtml;
 
             const downloadBtn = tileItem.querySelector('.tile-download');
             downloadBtn.addEventListener('click', () => this.downloadTile(index));
